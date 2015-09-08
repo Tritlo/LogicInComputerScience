@@ -1,0 +1,164 @@
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+
+%\usepackage{ulsy}
+\input{header.tex}
+
+% Maður man víst betur stuff sem er skrifað
+% í fonti sem erfitt er að lesa (t.d. sans serif)
+%\renewcommand*{\familydefault}{\sfdefault}
+
+
+\title{Logic in Computer Science}
+\author{Matthías Páll Gissurarson} \date{Autumn 2015}
+
+
+\newcommand{\dmu}{\text{d}\mu}
+\newcommand{\cEf}{& \Ef}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cB}{\mathcal{B}}
+%\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\U}{\mathfrak{U}}
+\newcommand{\dMu}{\text{d}\mu}
+\newcommand{\aabs}[1]{\abs{\abs{#1}}}
+\newcommand{\invf}{f^{-1}}
+\newcommand{\ess}{\text{ess}\:}
+\newcommand{\ind}[1]{\mathds{1}_{#1}}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\renewcommand{\Re}{\Real}
+\renewcommand{\Im}{\Imag}
+
+
+\newcommand{\txf}[2]{\f{\text{#1}}{\text{#2}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{2015-09-01}
+
+\url{www.cse.chalmers.se/edu/course/DAT060}
+
+What is logic about?
+\begin{itemize}
+  \item Rules for correct reasoning.
+  \item Foundation of mathematics.
+  \item Mathematics about mathematics (metamathematics)
+\end{itemize}
+
+History:
+\begin{itemize}
+    \item Babylonian mathematics $\sim$ 2000 BC.
+      Had no notion of proof, but gave very general examples. Could
+      calculate $\sqrt{2}$ to 7 decimals.
+    \item Pythagoras 580-495 BC.   Were shocked by that
+      the $\sqrt{2}$ was irrational.
+    \item \textbf{Aristotle} 384-322 BC
+      Called his rules for \textbf{Syllogism}, and had \textbf{24} of them.
+
+      Example: 
+        All dogs have four legs
+        Carlo is a dog.
+        => Carlo has four legs
+    \item Euclid $\sim$ 300 BC.  Geometry. Wrote Euclids elements, which
+      used axioms. Used for a long time in schools.
+    \item Archimedes 287-212 BC.
+
+    \item Islamic Logic:  Avicerna (ibn-suna) 980-1037 AD.
+     
+    \item Medival logic: 1200-1600 BC.
+
+\end{itemize}
+
+Scientific revolution:
+\begin{itemize}
+\item Galileo 1564-1642. The first one to conduct proper experiments. Science, not logic nor mathemathics.
+\item Descartes 1596-1650. Started an intellectual revolution. Was Both a
+  philosopher and a mathematician. Rationalism, ``Cogito ergo sum''.
+He wanted to write everything we know from the start.
+\item \textbf{Leibniz} 1646-1716. Also invented differential calculus.
+ Wanted to construct a langugae in which any argument could be represented
+ and checked to be correct or not.
+\item Newton 1646-1727.
+\end{itemize}
+
+Newton, Leibniz and Descartes were all convinced that god existed, and use that
+as a basis for some of their proofs, even though it is unproven.
+
+Empiricism:
+\begin{itemize}
+    \item Hume 1711 - 1776. Was a bit secular, and was interested in what it was
+      possible to know.
+    \item Boole 1815 - 1864 Laws of thought.
+      Propositional logic. $\wedge \vee, \rightarrow, \lnot$
+    \item \textbf{Gottlieb Frege} 1848 - 1925
+      Wrote a very important text about logic Begrüffnschift (1879)
+      Predicate logic, proposistional logic plus quantifiers: $\forall,\exists$
+
+      Grundgesetsse 1893, 1902
+      If P(x) is a property, then we can form the set $\set{ x | P(x)}$
+
+      \item Bertrand Russel. Found the Russel paradox, i.e.:
+        According to Frege, you can form the set 
+        \[ A = \set{x | x \not\in x }\]
+        Assume that $A \in A$ (1)
+         According to the definition we then get that $A \not\in A$ which
+          contradicts the assumption which hence must be false, i.e. $A \not\in
+          A$, but then (2) follow, by the definition of A, that $A \in A$.
+        \item  Cantor $\sim$ 1870 Set Theory.
+          Potential infinity $0,1,2, \dotsc, n, n+1, \dotsc$
+          Actual infinity:
+          $\set{0,1,2, \dotsc}$
+        \item Zemelo 1908 Given a set $G$, then we can form $\set{x \in G | P(x)}$
+        \item Brouwer
+          All mathematical objects must be constructed by us.
+          A proposition is true if and only if we can prove it (complete).
+          $A \vee \lnot A$.
+\end{itemize}
+
+\begin{itemize}
+\item Constructivism: Only things we can construct exists.
+\item Platonism: Objects exists independent of us.
+\item Formalism: Things can only be derived.
+\end{itemize}
+
+
+\chapter{2015-09-04}
+
+Missed
+
+
+\chapter{2015-09-08}
+
+\section{Inductive definitions}
+
+The set $N$ of natural numbers is inductively defined by
+\begin{enumerate}[(i)]
+\item 0 is a natural number
+\item if $n$ is a natrual number, then $\text{succ}(n)$ is a natural number.
+\end{enumerate}
+
+Expressed by rules:
+\begin{enumerate}[(i)]
+\item $0 \in \N$
+\item $\f{n \in \N}{\text{succ}(n) \in \N}$
+\end{enumerate}
+
+Example of a recursively defined function, $n!$
+
+\[\bcondef \text{fac}(0) & = 1 \\ \text{fac(succ($n$))} & \text{succ}(n) \cdot
+  \text{fac}(n) \econdef \]
+
+
+\end{document}

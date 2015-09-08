@@ -1,0 +1,347 @@
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+
+%\usepackage{ulsy}
+\input{header.tex}
+
+% Maður man víst betur stuff sem er skrifað
+% í fonti sem erfitt er að lesa (t.d. sans serif)
+%\renewcommand*{\familydefault}{\sfdefault}
+
+
+\title{Logic in Computer Science}
+\author{Matthías Páll Gissurarson} \date{Autumn 2015}
+
+
+\newcommand{\dmu}{\text{d}\mu}
+\newcommand{\cEf}{& \Ef}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cB}{\mathcal{B}}
+%\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\U}{\mathfrak{U}}
+\newcommand{\dMu}{\text{d}\mu}
+\newcommand{\aabs}[1]{\abs{\abs{#1}}}
+\newcommand{\invf}{f^{-1}}
+\newcommand{\ess}{\text{ess}\:}
+\newcommand{\ind}[1]{\mathds{1}_{#1}}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\renewcommand{\Re}{\Real}
+\renewcommand{\Im}{\Imag}
+
+
+\newcommand{\txf}[2]{\f{\text{#1}}{\text{#2}}}
+\newcommand{\If}{\text{if }}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{2015-09-01}
+
+\url{www.cse.chalmers.se/edu/course/DAT060}
+
+What is logic about?
+\begin{itemize}
+  \item Rules for correct reasoning.
+  \item Foundation of mathematics.
+  \item Mathematics about mathematics (metamathematics)
+\end{itemize}
+
+History:
+\begin{itemize}
+    \item Babylonian mathematics $\sim$ 2000 BC.
+      Had no notion of proof, but gave very general examples. Could
+      calculate $\sqrt{2}$ to 7 decimals.
+    \item Pythagoras 580-495 BC.   Were shocked by that
+      the $\sqrt{2}$ was irrational.
+    \item \textbf{Aristotle} 384-322 BC
+      Called his rules for \textbf{Syllogism}, and had \textbf{24} of them.
+
+      Example: 
+        All dogs have four legs
+        Carlo is a dog.
+        => Carlo has four legs
+    \item Euclid $\sim$ 300 BC.  Geometry. Wrote Euclids elements, which
+      used axioms. Used for a long time in schools.
+    \item Archimedes 287-212 BC.
+
+    \item Islamic Logic:  Avicerna (ibn-suna) 980-1037 AD.
+     
+    \item Medival logic: 1200-1600 BC.
+
+\end{itemize}
+
+Scientific revolution:
+\begin{itemize}
+\item Galileo 1564-1642. The first one to conduct proper experiments. Science, not logic nor mathemathics.
+\item Descartes 1596-1650. Started an intellectual revolution. Was Both a
+  philosopher and a mathematician. Rationalism, ``Cogito ergo sum''.
+He wanted to write everything we know from the start.
+\item \textbf{Leibniz} 1646-1716. Also invented differential calculus.
+ Wanted to construct a langugae in which any argument could be represented
+ and checked to be correct or not.
+\item Newton 1646-1727.
+\end{itemize}
+
+Newton, Leibniz and Descartes were all convinced that god existed, and use that
+as a basis for some of their proofs, even though it is unproven.
+
+Empiricism:
+\begin{itemize}
+    \item Hume 1711 - 1776. Was a bit secular, and was interested in what it was
+      possible to know.
+    \item Boole 1815 - 1864 Laws of thought.
+      Propositional logic. $\wedge \vee, \rightarrow, \lnot$
+    \item \textbf{Gottlieb Frege} 1848 - 1925
+      Wrote a very important text about logic Begrüffnschift (1879)
+      Predicate logic, proposistional logic plus quantifiers: $\forall,\exists$
+
+      Grundgesetsse 1893, 1902
+      If P(x) is a property, then we can form the set $\set{ x | P(x)}$
+
+      \item Bertrand Russel. Found the Russel paradox, i.e.:
+        According to Frege, you can form the set 
+        \[ A = \set{x | x \not\in x }\]
+        Assume that $A \in A$ (1)
+         According to the definition we then get that $A \not\in A$ which
+          contradicts the assumption which hence must be false, i.e. $A \not\in
+          A$, but then (2) follow, by the definition of A, that $A \in A$.
+        \item  Cantor $\sim$ 1870 Set Theory.
+          Potential infinity $0,1,2, \dotsc, n, n+1, \dotsc$
+          Actual infinity:
+          $\set{0,1,2, \dotsc}$
+        \item Zemelo 1908 Given a set $G$, then we can form $\set{x \in G | P(x)}$
+        \item Brouwer
+          All mathematical objects must be constructed by us.
+          A proposition is true if and only if we can prove it (complete).
+          $A \vee \lnot A$.
+\end{itemize}
+
+\begin{itemize}
+\item Constructivism: Only things we can construct exists.
+\item Platonism: Objects exists independent of us.
+\item Formalism: Things can only be derived.
+\end{itemize}
+
+
+\chapter{2015-09-04}
+
+Missed
+
+
+\begin{skgr}[$\vdash$ (derives)]
+  Syntatic implication.
+  If $S \vdash \psi$, it means that $\psi$ can be
+  derived from the formulas in $S$.
+\end{skgr}
+
+\begin{skgr}[$\models$ (models)]
+Semantic implication.
+$A \models B$ means that $B$ is true in every model in which $A$ is true.
+  
+\end{skgr}
+
+\chapter{2015-09-08}
+
+\section{Inductive definitions}
+
+The set $N$ of natural numbers is inductively defined by
+\begin{enumerate}[(i)]
+\item 0 is a natural number
+\item if $n$ is a natrual number, then $\text{succ}(n)$ is a natural number.
+\end{enumerate}
+
+Expressed by rules:
+\begin{enumerate}[(i)]
+\item $0 \in \N$
+\item $\f{n \in \N}{\text{succ}(n) \in \N}$
+\end{enumerate}
+
+Example of a recursively defined function, $n!$
+
+\[\bcondef \text{fac}(0) & = 1 \\ \text{fac(succ($n$))} & = \text{succ}(n) \cdot
+  \text{fac}(n) \econdef \]
+
+
+The set $\cF$ of proposistional formulas is inductively defined by
+\begin{enumerate}[(i)]
+\item  atoms, including $\bot$, are formulas
+\item if $\emptyset$ and $\psi$ are formulas, so are
+$(\emptyset \wedge \psi),
+ (\emptyset \vee \psi),
+ (\emptyset \to \psi)$
+and $(\lnot \emptyset)$
+\end{enumerate}
+
+\begin{daemi}
+  Define a function par which computes the number of parentheses
+in a formula. Done by recursion.
+
+\begin{enumerate}[(i)]
+\item  $\text{par}(\emptyset) = 0$ when $\emptyset$ is an atom.
+\item
+  \begin{gather*}
+   \text{par}((\emptyset \wedge \psi)) = \text{par}(\emptyset) +
+    \text{par}(\psi) + 2 \\
+   \text{par}((\emptyset \vee \psi)) = \text{par}(\emptyset) +
+    \text{par}(\psi) + 2 \\
+    \vdots\\
+    \text{par}((\lnot \emptyset)) = \text{par}(\emptyset) + 2
+  \end{gather*}
+\end{enumerate}
+\end{daemi}
+
+Truth tables
+
+\begin{tabular*}{0.5\linewidth}{c c | c | c | c | c}
+  $\emptyset$ & $\psi$ & $\emptyset \wedge \psi$ & $\emptyset \vee \psi$ &
+                                                                           $\emptyset
+                                                                           \to
+                                                                           \psi$
+  & $\lnot \emptyset$\\
+\hline
+T & T &T & T & T & F \\
+T & F & F & T & F & F \\
+F & T & F & T & T & T \\
+F & F & F & F & T & T \\
+\end{tabular*}
+
+Two kind of semantics
+\begin{enumerate}[(i)]
+\item  in terms of truth values ``The meaning of a formula is its truth value''
+  (Frege)
+\item In terms of proofs. Constructive semantics.
+\end{enumerate}
+
+\begin{skgr}[1.28, p 37]
+
+A \textbf{valuation} $v$ is a function from the set of atoms to the set of truth
+values
+$v: \set{p,q,r, p_1, p_2, p_3, \dotsc} \to \set{T,F}$
+$v$ can be extended to the set of proposistional formulas by recursion.
+
+\begin{enumerate}[(i)]
+\item $v$ is already defined on the atoms ($v(\bot) = F$)
+\item
+    \[v(\emptyset \wedge \psi) = \bcondef T & \If v(\psi) = v(\emptyset) = T \\ F
+    & \text{Otherwise} \econdef \\\]
+    \[v(\emptyset \vee \psi) = \bcondef T & \If v(\psi) = T \text{ or } v(\emptyset) = T \\ F
+    & \text{Otherwise} \econdef \\\]
+    \[v(\emptyset \to \psi) = \bcondef F & \If v(\emptyset) = T \text{ and } v(\psi) = F \\ T
+    & \text{Otherwise} \econdef \\\]
+    \[v(\not \emptyset ) = \bcondef T & \If v(\emptyset) = F \\ F
+    & \text{Otherwise} \econdef \\\]
+
+\end{enumerate}
+\end{skgr}
+
+\begin{skgr}[1.34, p 46]
+
+If for all valuations in which all $\emptyset_1,\dotsc, \emptyset_n$ evaluates
+to $T$, also $\psi$ evaluates to $T$ then \[\emptyset_1, \dotsc, \emptyset_n
+\models \psi\]
+holds.
+\end{skgr}
+
+\begin{daemi}
+  $p \wedge q \models p$ holds.
+Nota $p \wedge q \vdash$ with a completely different argument, namely the
+derivation
+\begin{enumerate}[1.]
+\item $p \wedge q$ premise
+\item \(p\)     $\wedge e_1, 1$
+\end{enumerate}
+
+\end{daemi}
+
+\begin{daemi}
+  \[ p,q \models p \wedge q \]
+\end{daemi}
+
+
+\begin{setn}[Soundness (1.35)]
+
+\[ \emptyset_1, \dotsc, \emptyset_n \vdash \psi \Rightarrow \emptyset_1,
+  \dotsc, \emptyset_n \models \psi\]
+\end{setn}
+\begin{proof}
+Proof by induction on the derivation
+\[ \f{\shortstack{\(\vdots \;\;\; \vdots\) \\ \(\psi_1 \;\;\;  \psi_2\)}}{\psi_1 \wedge \psi_2} \wedge i \]
+\[\f{\shortstack{\(\vdots\) \\ \(\psi_1 \wedge  \psi_2\)}}{\psi_1} \wedge e_i\]
+\[\f{\shortstack{\(\psi_1\)\\ \(\vdots\)\\ \(\psi_2\)}}{\psi_1 \to \psi_2} \to i\]
+\end{proof}
+
+\begin{setn}[1.4.4 p 49. Completeness]
+
+\[\emptyset_1, \dotsc, \emptyset_n \models \psi \to \emptyset_1, \dotsc,
+  \emptyset_n \vdash \psi\]
+Proof by kalmar 1930.
+The construction of Kalmar's derivation is exponential in the number of 
+atoms of the formulas $\sim 2^n$, where $n$ is the number of atoms.
+\end{setn}
+
+\begin{skgr}
+  If $\models \emptyset$ hodls, we say that $\emptyset$ is a \textbf{tautology}
+\end{skgr}
+$\emptyset$ is true for all valuations
+
+$\llbracket \emptyset \rrbracket_r = T$ for all $v$
+
+\[\emptyset_1, \dotsc, \emptyset_n \models \psi \Leftrightarrow \models
+  (\emptyset_1 \wedge \dotsb \wedge \emptyset_n) \to \psi \]
+
+\section{Constructive semantics}
+
+Brouwer, Heyting, Kolmogorov. 1930.
+
+A proposistion is defined by laying down what counts as a proof of it.
+
+\begin{tabular*}{1.0\linewidth}{c | l | l}
+  To prove& we must& Type\\
+  \hline
+  \(\emptyset \wedge \psi\) & prove \(\emptyset\) and prove \(\psi\) & \(A \times B\)\\
+  \hline
+  \(\emptyset \vee \psi\) & prove \(\emptyset\) or prove \(\psi\) & \(A + B\)\\
+  \hline
+  \(\emptyset \to \psi\) &  give a method which & \(A \to B\)\\
+  & to each proof of \(\emptyset\) gives a proof of \(\psi\)  & \\
+  \hline
+  \(\bot\) & nothing counts as a proof of $\bot$ & \(\bot\) \\
+\end{tabular*}
+
+Bishop 1967. Foundations of constructive analysis, a great work in constructive
+semantics.
+
+Thierry Coquand was given a prize for his work in logic.
+
+
+
+\begin{align*}
+  \wedge i: \;\;\; \f{\emptyset \;\;\; \psi}{\emptyset \wedge \psi} 
+    && \text{x-induction}: \;\;\; \f{a \in A \;\;\; b \in B}{\langle a,b \rangle \in A \times B} \times i\\
+\wedge e_1: \;\;\; \f{\emptyset \wedge \psi}{\emptyset} \\
+&& \text{x-elimination}: \;\;\; \f{c \in A \times B}{ \text{fst}(c) \in A} \times e_1\\
+\wedge e_2: \;\;\; \f{\emptyset \wedge \psi}{\psi} \\
+&& \text{x-elimination}: \;\;\; \f{c \in A \times B}{ \text{snd}(c) \in B} \times e_2
+\end{align*}
+
+Where
+ $\text{fst}(\langle  a, b \rangle) = a$  and
+ $\text{snd}(\langle  a, b \rangle) = b$ .
+
+Curry 1958. - noticed implications\\
+Howard 1969 - extended to predicate logic.\\
+Per Marten-Löf 1970. Type theory.
+
+\end{document}

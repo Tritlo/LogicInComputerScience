@@ -1,0 +1,202 @@
+% not needed with polyglossia
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{dsfont}
+
+%xe/lualatex
+% \usepackage{polyglossia}
+% \setdefaultlanguage{icelandic}
+
+
+\usepackage{graphics,amsmath,amsfonts}
+%\usepackage{theoremref}
+\usepackage{amsbsy,amssymb}
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage[a4paper]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{datatool}
+\usepackage{float}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{listingsutf8}
+\usepackage{enumerate}
+\usepackage{comment}
+\usepackage{epstopdf}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{titling}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+\usepackage{tabu}
+
+\usepackage{accents}
+
+\usepackage{ stmaryrd }
+
+%\usepackage[parfill]{parskip}
+
+\setlength{\parskip}{8pt plus 1pt minus 1pt}
+%Verdur ad vera her, sumir pakkar dependa a thetta.
+% \usepackage[english]{babel}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+%viljum ekki númeraða kafla á dæmum
+
+
+\newcommand{\runa}[1]{\left(#1 \right)_{n \geq 1}}
+\newcommand{\limfty}{\underset{n\to\infty}{\lim}}
+\newcommand{\exR}{\bar{\R}}
+\newcommand{\esssup}{{\ess\sup}}
+\newcommand{\essinf}{{\ess\inf}}
+\newcommand{\mCh}{\mathds{1}}
+
+\newcommand{\nonums}{\setcounter{secnumdepth}{-1}}
+
+%flýtiskipanir
+\newcommand{\e}{\emph}
+
+
+%\newcommand{\R}{\Real}
+%\newcommand{\C}{\Complex}
+%\newcommand{\Z}{\Integer}
+%\newcommand{\N}{\Natural}
+%\newcommand{\Q}{\Rational}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Con}{\mathcal{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\f}{\frac}
+\newcommand{\1}{\frac{1}}
+\newcommand{\eps}{\f{\epsilon}}
+\newcommand{\Lra}{\Leftrightarrow}
+\newcommand{\Th}{\text{ þegar }}
+\newcommand{\Ef}{\text{ ef }}
+\newcommand{\Og}{\text{ og }}
+
+
+\newcommand{\inner}[1]{\accentset{\circ}{#1}}
+\newcommand{\eR}{\widetilde{\R}}
+
+\newcommand{\sumninfty}[1]{\sum_{n = {#1}}^{\infty}}
+\newcommand{\sumoinfty}{\sum_{n = 1}^{\infty}}
+\newcommand{\summinfty}{\sum_{m = 1}^{\infty}}
+\newcommand{\sumzinfty}{\sum_{n = 0}^{\infty}}
+
+\newcommand{\com}[1]{\set{\text{#1}}}
+\newcommand{\Com}[1]{\set{\text{Athsmd: \text{#1}}}}
+
+\newcommand{\ub}[2]{\underbrace{#1}_{\text{#2}}}
+\newcommand{\ubt}[2]{$\ub{\text{#1}}{#2}$}
+
+
+\newenvironment{inum}{\begin{enumerate}[label=(\roman*).]}{\end{enumerate}}
+\newenvironment{anum}{\begin{enumerate}[label=(\alph*).]}{\end{enumerate}}
+
+
+\newcommand{\bcondef}{\left\{ \begin{array}{l l}}
+\newcommand{\abs}[1]{{\left|#1\right|}}
+\newcommand{\norm}[1]{{\left|\left|#1\right|\right|}}
+
+\newcommand{\econdef}{\end{array} \right.}
+\DeclarePairedDelimiter{\condef}{\bcondef}{\econdef}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclarePairedDelimiter{\braket}{\langle}{\rangle}
+
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Img}{Img}
+\DeclareMathOperator{\Rea}{Re}
+\DeclareMathOperator{\Imaging}{Im}
+
+\renewcommand{\Re}{\Rea}
+\renewcommand{\Im}{\Imaging}
+\DeclareMathOperator{\Span}{Span}
+
+\newcommand{\sep}{\;|\;}
+
+\newcommand{\fig}[2]{
+\begin{figure}[H]
+  \centering
+  \includegraphics{#1}
+  \caption{#2}
+  \label{fig:#1}
+\end{figure}
+}
+
+
+
+\renewcommand{\qedsymbol}{\textbf{Q.E.D}}
+
+\mdfdefinestyle{theoremstyle}{%
+roundcorner=5pt, %
+%leftmargin=1pt, rightmargin=1pt, %
+hidealllines=true, %
+align = center, % align theenvironment itself (left, center, rigth)
+nobreak=true,
+}
+
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem*{setn}{Theorem}
+\newtheorem{setn*}[equation]{Theorem}
+\newtheorem*{hsetn}{lemma}
+
+\theoremstyle{definition}
+\newtheorem*{skgr}{Definition}
+\newtheorem{skgr*}[equation]{Definition}
+\newtheorem*{daemi}{Example}
+\newtheorem{daemi*}[equation]{Example}
+\newtheorem*{frumsenda}{Axiom}
+\newtheorem*{lausn}{Lausn}
+
+
+\theoremstyle{remark}
+\newtheorem*{ath}{Remark}
+\newtheorem*{innsk}{Innskot}
+
+\surroundwithmdframed[style=theoremstyle,backgroundcolor = green!20]{skgr}
+\surroundwithmdframed[style=theoremstyle,backgroundcolor=blue!10]{setn}
+\surroundwithmdframed[style=theoremstyle,backgroundcolor = orange!20]{daemi}
+
+\surroundwithmdframed[style=theoremstyle,backgroundcolor = green!20]{skgr*}
+\surroundwithmdframed[style=theoremstyle,backgroundcolor=blue!10]{setn*}
+\surroundwithmdframed[style=theoremstyle,backgroundcolor = orange!20]{daemi*}
+
+\surroundwithmdframed[style=theoremstyle,backgroundcolor = red!20]{ath}
+
+
+
+\lstset{  literate={á}{{\'a}}1
+                  {ó}{{\'o}}1
+                  {ú}{{\'u}}1
+                  {ð}{{\dh}}1
+                  {í}{{\'i}}1
+                  {é}{{\'e}}1
+                  {ö}{{\"o}}1
+                  {þ}{{\th}}1
+                  {æ}{{\ae}}1
+                  {ý}{{\'y}}1
+                  {Á}{{\'A}}1
+                  {Ó}{{\'O}}1
+                  {Ú}{{\'U}}1
+                  {Ð}{{\DH}}1
+                  {Í}{{\'I}}1
+                  {É}{{\'E}}1
+                  {Ö}{{\"O}}1
+                  {Þ}{{\TH}}1
+                  {Æ}{{\AE}}1
+                  {Ý}{{\'Y}}1}
